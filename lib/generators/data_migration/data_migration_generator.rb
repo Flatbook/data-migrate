@@ -13,7 +13,7 @@ module DataMigrate
 
       def create_data_migration
         set_local_assigns!
-        migration_template "data_migration.rb", "db/data/#{file_name}.rb"
+        migration_template "data_migration.rb", "#{data_migrations_path}#{file_name}.rb"
       end
 
       protected
@@ -33,6 +33,10 @@ module DataMigrate
         else
           "ActiveRecord::Migration"
         end
+      end
+
+      def data_migrations_path
+        DataMigrate.config.data_migrations_path || "db/data/"
       end
     end
   end
